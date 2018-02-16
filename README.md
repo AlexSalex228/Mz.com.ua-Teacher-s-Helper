@@ -1,4 +1,4 @@
-# Mz.com.ua-TeacherHelper
+# Mz.com.ua-Teacher'sHelper
 Скрипт позволяет учителям увеличить скорость работы с электронным журналом [mz.com.ua](http://mz.com.ua), добавляя возможность создать сразу множество уроков одной дисциплины (к примеру на семместр, а не добавляя каждый урок отдельно) а так же позволяет ускорить работу с вводом тем уроков и домашних заданий.
 
 This script helps teachers to faster create lessons and write homework's task and lessons topic without a lot of windows
