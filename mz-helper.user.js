@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MZ autocreate lessons
 // @namespace    http://tampermonkey.net/
-// @version      0.15
+// @version      0.16
 // @description  Help to fill lesson on mz.com.ua
 // @author       Evgenles
 // @match        http://mz.com.ua/schedule/lesson/*
@@ -64,10 +64,14 @@ var filllessonsaditional = function(){
                 newlesson.style.width = '100%';
                 lessons[i].replaceChild(newlesson,lessons[i].children[0]);
             }
-            document.querySelectorAll(".table_style")[3].insertAdjacentHTML('beforeend',"<tfoot><tr><td colspan='3' style='text-align:center'><button id='savelessonsaditional'>Save</button></td></tr></tfoot>");
+            var tableaditional =  document.querySelectorAll(".table_style")[3];
+           tableaditional.insertAdjacentHTML('beforeend',"<tfoot><tr><td colspan='4' style='text-align:center'><button id='savelessonsaditional'>Save</button></td></tr></tfoot>");
             $("#savelessonsaditional").click(function(){
+                let lastchildrowadd = tableaditional.lastElementChild.lastElementChild;
+                if(lastchildrowadd.className=="SuccessAjaxRow")tableaditional.lastElementChild.removeChild(lastchildrowadd);
                 console.log(csrftokenaditional);
-                var lessonsrow = document.querySelectorAll(".table_style")[3].children[1].children;
+                var lessonsrow = tableaditional.children[1].children;
+                let hasfail = false;
                 for (var i =0;i<lessonsrow.length;i++){
                     let scheduleidadd = lessonsrow[i].children[1].id.replace("osr","").replace("topic","");
                     let schedule = {
@@ -80,11 +84,9 @@ var filllessonsaditional = function(){
                             url: "http://mz.com.ua/schedule/editor/homework?lesson="+scheduleidadd+"&edit_mode=1",
                             type: 'post',
                             data: jQuery.param(schedule),
-                            success: function(data) {
-                                console.log("success ");
-                            }
                         });
                 }
+                tableaditional.lastElementChild.insertAdjacentHTML('beforeend', "<tr class='SuccessAjaxRow'><td colspan='4' style='text-align:center'><p style='color:green'> Выполнено!</p></td></tr>");
             });
         }
         else {
