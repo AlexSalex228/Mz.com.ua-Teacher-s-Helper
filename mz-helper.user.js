@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MZ autocreate lessons
 // @namespace    http://tampermonkey.net/
-// @version      0.16
+// @version      0.17
 // @description  Help to fill lesson on mz.com.ua
 // @author       Evgenles
 // @match        http://mz.com.ua/schedule/lesson/*
@@ -23,8 +23,8 @@ var filllessonsaditional = function(){
      $('#overlay_box').prepend('<div style="text-align:center"><label style="color:#ce1717;font-size: large;font-weight: bold;">Внимание!!! Перед нажатием "Заполнить"&nbsp обязательно проверьте правильность полей (Класс, Подгруппа, Предмет, Тип предмету, Урок, Кабинет)</label></div><div id="aditionalscriptdiv" style="display:table"><div style="display:table-row"><label style="display:table-cell">Дата начала</label><input id="datestartaditional" style="display:table-cell"/><label style="display:table-cell">(Формат: MM.DD.YYYY)</label></div><div  style="display:table-row"><label style="display:table-cell">Дата окончания</label><input id="dateendaditional" style="display:table-cell"/><label style="display:table-cell">(Формат: MM.DD.YYYY)</label></div><div style="display:table-row"><label style="display:table-cell">День недели</label><input id="dayofweekaditional" style="display:table-cell"/><label style="display:table-cell">(1 - Понедельник, 2 - вторник ...)</label></div><div><button id="statadditionquery">Заполнить</button></div></div>');       common.overlay.close();
             $('#statadditionquery').click(function(){
                 var inputed = parseInt($('#dayofweekaditional').val());
-                var startdate = new Date($('#datestartaditional').val()+' GMT');
-                var enddate = new Date($('#dateendaditional').val()+' GMT');
+                var startdate = new Date($('#datestartaditional').val()+' 12:00:00 GMT');
+                var enddate = new Date($('#dateendaditional').val()+' 12:00:00 GMT');
                 var currentdate = startdate;
                 var ser = $('#editLessonForm').serialize();
                 var regexdate = new RegExp('(lesson_date%5D=).*(&schedule%5Bbuzzer_id)');
